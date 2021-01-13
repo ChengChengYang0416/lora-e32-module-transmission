@@ -2,7 +2,7 @@ import serial
 
 # set serial port and baudrate
 port = '/dev/ttyUSB0'
-baudrate = 9600
+baudrate = 115200
 ser = serial.Serial(port, baudrate)
 print("connected to: " + ser.portstr)
 
