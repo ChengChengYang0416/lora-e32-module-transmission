@@ -1,9 +1,18 @@
 #include <stm32f4xx.h>
 #include <stdio.h>
 
-void delay(uint32_t count)
+static volatile int time_count;
+
+void delay(uint32_t millisecond)
 {
-	while(count--);
+	time_count = millisecond;
+
+	while(time_count);
+}
+
+void SysTick_Handler()
+{
+	if(time_count) time_count--;
 }
 
 void usart3_init(void)
@@ -64,14 +73,14 @@ void usart_puts(char *string)
 
 int main()
 {
+	SysTick_Config(SystemCoreClock / 1000);
 	usart3_init();
-
 	usart_puts("\nSTM32: Hello World!\n\r");
 
 	int num = 0;
 
 	while(1) {
-		delay(10000000);
+		delay(1000);
 		if (num >= 9){
 			num = 0;
 		}else
