@@ -11,8 +11,7 @@ while True:
 		# read data from serial port and decode
 		data = ser.readline().decode('utf-8')
 		print(data)
-	except:
-		# keyboard interrupt
-		print("Keyboard interrupt")
+	except Exception as error_messages:
+		# exception
+		print(error_messages)
 		break
-
