@@ -1,6 +1,7 @@
 #include <stm32f4xx.h>
 #include <stdio.h>
 
+#define LENGTH_OF_TEST 12
 static volatile int time_count;
 
 void delay(uint32_t millisecond)
@@ -75,23 +76,22 @@ int main()
 {
 	SysTick_Config(SystemCoreClock / 1000);
 	usart3_init();
-	usart_puts("\nSTM32: Hello World!\n\r");
+	usart_puts("\nBeginning of the transmission test.\n\r");
 
-	int num = 0;
-
-	while(1) {
-		delay(1000);
-		if (num >= 9){
-			num = 0;
-		}else
-		{
-			num++;
-		}
-
+	int length_of_test = LENGTH_OF_TEST;
+	int delay_time = 1000;
+	for (int i = 0; i < length_of_test; i++){
 		char char_arr[2];
-		sprintf(char_arr, "%d\n", num);
+		sprintf(char_arr, "%d\n", i%10);
 		usart_puts(char_arr);
+		delay(delay_time);
 	}
+
+	usart_puts("End of the transmission test.\n\r");
+	char end_messages[50];
+	int t = delay_time*length_of_test;
+	sprintf(end_messages, "%d packages were send in %d milliseconds.\n", length_of_test, t);
+	usart_puts(end_messages);
 
 	return 0;
 }
