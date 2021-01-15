@@ -76,22 +76,25 @@ int main()
 {
 	SysTick_Config(SystemCoreClock / 1000);
 	usart3_init();
-	usart_puts("\nBeginning of the transmission test.\n\r");
+	usart_puts("Beginning of the transmission test.\n\r");
 
 	int length_of_test = LENGTH_OF_TEST;
-	int delay_time = 1000;
+	int delay_time = 1;
+	char char_arr[2];
 	for (int i = 0; i < length_of_test; i++){
-		char char_arr[2];
 		sprintf(char_arr, "%d\n", i%10);
 		usart_puts(char_arr);
 		delay(delay_time);
 	}
 
-	usart_puts("End of the transmission test.\n\r");
+	delay(500);
 	char end_messages[50];
 	int t = delay_time*length_of_test;
 	sprintf(end_messages, "%d packages were send in %d milliseconds.\n", length_of_test, t);
 	usart_puts(end_messages);
+	char end_signal[10];
+	sprintf(end_signal, "end\n");
+	usart_puts(end_signal);
 
 	return 0;
 }
