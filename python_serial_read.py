@@ -16,6 +16,7 @@ while True:
 		if data == 'end\n':
 			print("End of the transmission test.\n")
 			print(repr(counter-3) + " packages received.\n")
+			counter = 0
 		else:
 			print(data)
 	except Exception as error_messages:
