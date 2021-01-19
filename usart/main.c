@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #define LENGTH_OF_TEST 6000
+#define send_frequency 40
 static volatile int time_count;
 
 void delay(uint32_t millisecond)
@@ -79,7 +80,7 @@ int main()
 	usart_puts("Beginning of the transmission test.\n\r");
 
 	int length_of_test = LENGTH_OF_TEST;
-	int delay_time = 25;
+	int delay_time = 1000/send_frequency;
 	char char_arr[2];
 	for (int i = 0; i < length_of_test; i++){
 		sprintf(char_arr, "%d\n", i%10);
