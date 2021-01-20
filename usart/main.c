@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 #define LENGTH_OF_TEST 600
-#define send_frequency 10
-#define LENGTH_OF_PACKAGE 20
+#define send_frequency 5
+#define LENGTH_OF_PACKAGE 100
 static volatile int time_count;
 
 void delay(uint32_t millisecond)
@@ -96,10 +96,8 @@ int main()
 	delay(500);
 	char end_messages[50];
 	int t = delay_time*length_of_test;
-	sprintf(end_messages, "%d packages were send in %d milliseconds.\n", length_of_test, t);
-	usart_puts(end_messages);
 	char end_signal[10];
-	sprintf(end_signal, "end\n");
+	sprintf(end_signal, "e");
 	usart_puts(end_signal);
 
 	return 0;
