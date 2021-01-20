@@ -10,12 +10,13 @@ counter = 0
 while True:
 	try:
 		# read data from serial port and decode
-		data = ser.readline().decode('utf-8')
-		global counter
-		counter += 1
-		if data == 'end\n':
+		data = ser.read().decode('ascii')
+		if data == '\n':
+			global counter
+			counter += 1
+		if data == 'e':
 			print("End of the transmission test.\n")
-			print(repr(counter-3) + " packages received.\n")
+			print(repr(counter-2) + " packages received.\n")
 			counter = 0
 		else:
 			print(data)
