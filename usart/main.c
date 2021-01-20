@@ -1,8 +1,9 @@
 #include <stm32f4xx.h>
 #include <stdio.h>
 
-#define LENGTH_OF_TEST 6000
-#define send_frequency 40
+#define LENGTH_OF_TEST 600
+#define send_frequency 10
+#define LENGTH_OF_PACKAGE 20
 static volatile int time_count;
 
 void delay(uint32_t millisecond)
@@ -81,9 +82,13 @@ int main()
 
 	int length_of_test = LENGTH_OF_TEST;
 	int delay_time = 1000/send_frequency;
-	char char_arr[2];
+	char char_arr[LENGTH_OF_PACKAGE];
+	for (int j = 0; j < LENGTH_OF_PACKAGE; j++){
+		char_arr[j] = '1';
+	}
+	char_arr[LENGTH_OF_PACKAGE-1] = '\n';
+
 	for (int i = 0; i < length_of_test; i++){
-		sprintf(char_arr, "%d\n", i%10);
 		usart_puts(char_arr);
 		delay(delay_time);
 	}
