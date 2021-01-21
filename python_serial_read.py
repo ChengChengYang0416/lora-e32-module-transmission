@@ -16,7 +16,7 @@ while True:
 			counter += 1
 		if data == 'e':
 			print("End of the transmission test.\n")
-			print(repr(counter-2) + " packages received.\n")
+			print(repr(counter-1) + " packages received.\n")
 			counter = 0
 		else:
 			print(data)
